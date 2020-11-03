@@ -16,7 +16,6 @@ eventManager.on('delivered', deliveredHandler);
 eventManager.emit('pickup', 'flowers')
 
 
-
 function pickupHandler(item){
   let time = timeStamp();
   console.log(`Alert Driver: ${item}: is ready be picked up at ${time}`)
