@@ -4,13 +4,15 @@ const net = require('net');
 
 const PORT = process.env.PORT || 3000;
 const server = net.createServer();
+const socketio = require('socket.io');
+const io = socketio(server);
 
 server.listen(PORT, () => console.log(`Server up on ${PORT}`));
 
 // Create a list of clients that have connected to us.
 let socketPool = {};
 
-server.on('connection', (socket) => {
+io.on('connection', (socket) => {
   // Give each client a unique ID number
   const id = `Socket-${Math.random()}`;
   // Add them to the list (we're goign to need this later...)
@@ -27,7 +29,7 @@ server.on('connection', (socket) => {
 
 });
 
-server.on('error', (e) => {
+io.on('error', (e) => {
   console.error('SERVER ERROR', e.message);
 });
 
